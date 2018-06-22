@@ -31,15 +31,30 @@
             <objects>
                 <viewController id="OpK-GS-L56" customClass="ViewController" customModule="Annotation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="cvS-EZ-SfK">
-                        <rect key="frame" x="0.0" y="0.0" width="715" height="652"/>
+                        <rect key="frame" x="0.0" y="0.0" width="939" height="804"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D7j-zO-x9Z" customClass="DrawRectangle" customModule="Annotation" customModuleProvider="target">
+                                <rect key="frame" x="188" y="55" width="563" height="694"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UCu-Pq-GNq">
+                                        <rect key="frame" x="-33" y="9" width="640" height="694"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="TzF-4M-0cx"/>
+                                    </imageView>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bTz-r2-zuD">
+                                        <rect key="frame" x="0.0" y="0.0" width="563" height="694"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </customView>
+                                </subviews>
+                            </customView>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oWC-23-s2W">
-                                <rect key="frame" x="0.0" y="0.0" width="124" height="652"/>
+                                <rect key="frame" x="20" y="66" width="124" height="694"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UZo-8E-itK">
-                                        <rect key="frame" x="14" y="120" width="103" height="32"/>
+                                        <rect key="frame" x="14" y="162" width="103" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BU0-V9-tel">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -50,7 +65,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s9V-mO-nar">
-                                        <rect key="frame" x="11" y="604" width="103" height="32"/>
+                                        <rect key="frame" x="14" y="589" width="103" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" title="Select File" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6bE-Uc-hy5">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -62,34 +77,18 @@
                                     </button>
                                 </subviews>
                             </customView>
-                            <imageView canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y5S-sP-jew">
-                                <rect key="frame" x="126" y="0.0" width="444" height="646"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="rjZ-i7-IzG"/>
-                            </imageView>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hnh-Lh-N14">
-                                <rect key="frame" x="123" y="6" width="450" height="643"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <shadow key="shadow" blurRadius="2">
-                                    <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </shadow>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="mfA-fR-iZg"/>
-                            </imageView>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D7j-zO-x9Z">
-                                <rect key="frame" x="126" y="9" width="444" height="643"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </customView>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="CustomView" destination="D7j-zO-x9Z" id="K5M-Ye-hLX"/>
-                        <outlet property="imageView" destination="Y5S-sP-jew" id="giV-ic-9pY"/>
-                        <outlet property="imageWell" destination="hnh-Lh-N14" id="TfX-bz-c9q"/>
+                        <outlet property="customView" destination="D7j-zO-x9Z" id="qq4-ka-eG2"/>
+                        <outlet property="customView02" destination="bTz-r2-zuD" id="piq-AS-E6b"/>
+                        <outlet property="imageView" destination="UCu-Pq-GNq" id="6WU-le-FcR"/>
                     </connections>
                 </viewController>
                 <customObject id="4wS-D4-2IQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="345.5" y="-35"/>
+            <point key="canvasLocation" x="414.5" y="41"/>
         </scene>
     </scenes>
 </document>

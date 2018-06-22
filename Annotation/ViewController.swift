@@ -7,58 +7,36 @@
 //
 
 import Cocoa
-
+import QuartzCore
 
 class ViewController: NSViewController {
     
-    
     // 画像を表示させるimageView
     @IBOutlet weak var imageView: NSImageView!
-    @IBOutlet weak var imageWell: NSImageView!
-    @IBOutlet weak var CustomView: NSView!
-    
+    @IBOutlet weak var customView: NSView!
+    @IBOutlet weak var customView02: NSView!
     
     // メンバ
-    var first_point  = CGPoint.zero
-    var end_point    = CGPoint.zero
     var text_write:String = "yeah"
     var filename:String   = ""
    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let dr = NSView()
-        dr.frame = NSRect(x: imageWell.frame.minX, y: imageWell.frame.minY, width: imageWell.frame.width, height: imageWell.frame.size.height)
-        self.view.addSubview(dr)
         
-        // Do any additional setup after loading the view.
+        // 破線の矩形をマウス操作で表示
+        let dr = DrawRectangle(frame: customView.frame)
+        self.customView.addSubview(dr)
+        
+        
+        //let mr = MakeRectangle(frame: customView02.frame)
+        //self.customView02.addSubview(mr)
     }
 
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
         }
-    }
-    
-    override func mouseDown(with event: NSEvent) {
-        first_point = CGPoint(x: event.locationInWindow.y, y: event.locationInWindow.y)
-        print(first_point)
-    }
-    override func mouseDragged(with event: NSEvent) {
-        
-        end_point = CGPoint(x: event.locationInWindow.x, y: event.locationInWindow.y)
-        print(end_point)
-        self.imageWell.image?.draw(in: NSRect(x: first_point.x , y: first_point.y , width: end_point.x - first_point.x, height: end_point.y - first_point.y))
-    }
-    
-    
-    
-    
-    
-    func drawRect(){
-    
-            view = DrawRectangle(frame: NSRect(x: first_point.x , y: first_point.y , width: end_point.x - first_point.x, height: end_point.y - first_point.y))
-            CustomView.addSubview(view)
     }
     
     
@@ -78,7 +56,7 @@ class ViewController: NSViewController {
                 //urlのStringを保存
                 self.filename = (dialog.url?.absoluteString)!
                 // ここでファイルを読み込む
-                self.imageWell.image = NSImage(contentsOf: dialog.url!)
+                self.imageView.image = NSImage(contentsOf: dialog.url!)
             }
         }
     }
@@ -122,12 +100,4 @@ class ViewController: NSViewController {
     
     
     
-}
-class DrawRectangle: NSView{
-    override func draw(_ dirtyRect: NSRect) {
-        let context = NSGraphicsContext.current?.cgContext
-        NSColor.green.set()
-        context?.addRect(dirtyRect)
-        context?.fillPath()
-    }
 }
