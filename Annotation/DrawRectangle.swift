@@ -12,19 +12,18 @@ import QuartzCore
 
 class DrawRectangle: NSView {
     
-    
-    
     var start_point: CGPoint?
     var end_point:   CGPoint?
     var shapeLayer : CAShapeLayer!
+    var count:Int = 0
+    // ViewController Class を呼び出す
+    let VC = ViewController()
 
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
     }
     
     override func mouseDown(with event: NSEvent) {
-        print("mouseDown: \(event.locationInWindow)")
-        //start_point = event.locationInWindow
         
         self.start_point = self.convert(event.locationInWindow, from: nil)
         
@@ -45,7 +44,6 @@ class DrawRectangle: NSView {
     }
     
     override func mouseDragged(with event: NSEvent) {
-        print("mouseDragged\(event.locationInWindow)")
         
         let point : NSPoint = self.convert(event.locationInWindow, from: nil)
         let path = CGMutablePath()
@@ -59,35 +57,97 @@ class DrawRectangle: NSView {
     }
     
     override func mouseUp(with event: NSEvent){
-        print("mouseUP: \(event.locationInWindow)")
-        end_point = event.locationInWindow
         
+        end_point = event.locationInWindow
         
         // layerから消す
         self.shapeLayer.removeFromSuperlayer()
         self.shapeLayer = nil
+        drawRect()
         
-       /*
-        let path = CGMutablePath()
-        //path.
-        path.move(to: self.start_point!)
-        path.addLine(to: NSPoint(x: (self.start_point?.x)!, y: (end_point?.y)!))
-        path.addLine(to: end_point!)
-        path.addLine(to: NSPoint(x:(end_point?.x)!,y:(self.start_point?.y)!))
-        path.closeSubpath()
+        let temp:NSRect = NSRect(x:   (start_point?.x)!,
+                                 y:   (start_point?.y)!,
+                                 width:   ((end_point?.x)! - (start_point?.x)!),
+                                 height:   ((end_point?.y)! - (start_point?.y)!))
         
-        var newShape = CAShapeLayer()
-        newShape.path = path
-        newShape.lineWidth = 3.0
-        newShape.strokeColor = NSColor.blue.cgColor
-        newShape.fillColor = NSColor.blue.cgColor
-        self.shapeLayer.path = path
-        self.shapeLayer.addSublayer(newShape)
-        */
-        
-        
-        
-        
+        VC.rectArray.append(temp)
+        print(VC.rectArray)
         
     }
+    // 新しく矩形を作り、色分けしたものを表示
+    func drawRect() -> Void {
+        
+        shapeLayer = CAShapeLayer()
+        shapeLayer.lineWidth = 2.0
+        shapeLayer.fillColor = NSColor.clear.cgColor
+        shapeLayer.strokeColor = {()-> CGColor in
+            
+            let colorVal = count % 5
+            var returnVal:CGColor?
+            
+            switch colorVal{
+                case 0:
+                    returnVal = NSColor.red.cgColor
+                case 1:
+                    returnVal = NSColor.blue.cgColor
+                case 2:
+                    returnVal = NSColor.green.cgColor
+                case 3:
+                    returnVal = NSColor.yellow.cgColor
+                case 4:
+                    returnVal = NSColor.purple.cgColor
+                default:
+                    print("error in drawRect() from DrawRectangle.swift class")
+            }
+            print(count)
+            self.count = count + 1
+            
+            return returnVal!
+        }()
+        
+        self.layer?.addSublayer(shapeLayer)
+        let point : NSPoint = self.convert(end_point!, from: nil)
+        let path = CGMutablePath()
+        path.move(to: self.start_point!)
+        path.addLine(to: NSPoint(x: (self.start_point?.x)!, y: point.y))
+        path.addLine(to: point)
+        path.addLine(to: NSPoint(x:point.x,y:(self.start_point?.y)!))
+        path.closeSubpath()
+        self.shapeLayer.path = path
+    }
+    func pickColor(int:Int)-> CGColor {
+        
+        var returnVal:CGColor?
+        
+        if isIntValid(int: int){
+            
+            switch int{
+            case 0:
+                returnVal = NSColor.red.cgColor
+            case 1:
+                returnVal = NSColor.blue.cgColor
+            case 2:
+                returnVal = NSColor.green.cgColor
+            case 3:
+                returnVal = NSColor.yellow.cgColor
+            case 4:
+                returnVal = NSColor.purple.cgColor
+            default:
+                print("error in drawRect() from DrawRectangle.swift class")
+            }
+            self.count += 1
+            return returnVal!
+        }
+        print("error in drawRect() from DrawRectangle.swift class")
+        return NSColor.darkGray.cgColor
+    }
+    func isIntValid(int:Int)->Bool{
+        if 0 <= int && int <= 5 {
+            return true
+        }
+        return false
+    }
+    
+    
+    
 }

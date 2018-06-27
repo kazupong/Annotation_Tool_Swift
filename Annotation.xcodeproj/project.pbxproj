@@ -14,7 +14,6 @@
 		89C9C96C20D49FC600AFEF2E /* AnnotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C9C96B20D49FC600AFEF2E /* AnnotationTests.swift */; };
 		89C9C97720D49FC600AFEF2E /* AnnotationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C9C97620D49FC600AFEF2E /* AnnotationUITests.swift */; };
 		89C9C9BF20DC5F7D00AFEF2E /* DrawRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C9C9BE20DC5F7D00AFEF2E /* DrawRectangle.swift */; };
-		89C9C9C120DC69EA00AFEF2E /* MakeRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C9C9C020DC69EA00AFEF2E /* MakeRectangle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +48,6 @@
 		89C9C97620D49FC600AFEF2E /* AnnotationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationUITests.swift; sourceTree = "<group>"; };
 		89C9C97820D49FC600AFEF2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89C9C9BE20DC5F7D00AFEF2E /* DrawRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawRectangle.swift; sourceTree = "<group>"; };
-		89C9C9C020DC69EA00AFEF2E /* MakeRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRectangle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,10 +100,9 @@
 			children = (
 				89C9C95820D49FC400AFEF2E /* AppDelegate.swift */,
 				89C9C95A20D49FC400AFEF2E /* ViewController.swift */,
-				89C9C9C020DC69EA00AFEF2E /* MakeRectangle.swift */,
 				89C9C9BE20DC5F7D00AFEF2E /* DrawRectangle.swift */,
-				89C9C95C20D49FC600AFEF2E /* Assets.xcassets */,
 				89C9C95E20D49FC600AFEF2E /* Main.storyboard */,
+				89C9C95C20D49FC600AFEF2E /* Assets.xcassets */,
 				89C9C96120D49FC600AFEF2E /* Info.plist */,
 				89C9C96220D49FC600AFEF2E /* Annotation.entitlements */,
 			);
@@ -269,7 +266,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				89C9C95B20D49FC400AFEF2E /* ViewController.swift in Sources */,
-				89C9C9C120DC69EA00AFEF2E /* MakeRectangle.swift in Sources */,
 				89C9C95920D49FC400AFEF2E /* AppDelegate.swift in Sources */,
 				89C9C9BF20DC5F7D00AFEF2E /* DrawRectangle.swift in Sources */,
 			);

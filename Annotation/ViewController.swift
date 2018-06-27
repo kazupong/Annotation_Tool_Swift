@@ -9,7 +9,7 @@
 import Cocoa
 import QuartzCore
 
-class ViewController: NSViewController {
+class ViewController: NSViewController,NSTableViewDataSource {
     
     // 画像を表示させるimageView
     @IBOutlet weak var imageView: NSImageView!
@@ -19,18 +19,17 @@ class ViewController: NSViewController {
     // メンバ
     var text_write:String = "yeah"
     var filename:String   = ""
-   
     
+    //@IBOutlet var rectArray: NSArrayController!
+    var rectArray: Array<NSRect> = Array()
+    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // 破線の矩形をマウス操作で表示
         let dr = DrawRectangle(frame: customView.frame)
         self.customView.addSubview(dr)
         
-        
-        //let mr = MakeRectangle(frame: customView02.frame)
-        //self.customView02.addSubview(mr)
     }
 
     override var representedObject: Any? {
@@ -38,7 +37,13 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return rectArray.count
+    }
     
+    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+        return rectArray[row]
+    }
     
     // ファイルを一つづつ選択するボタン
     @IBAction func selectFile(_ sender: Any) {
@@ -69,18 +74,11 @@ class ViewController: NSViewController {
             let path_file_name = dir.appendingPathComponent(filename)
             
             do {
-                
                 try text_write.write( to: path_file_name, atomically: false, encoding: String.Encoding.utf8 )
-                
             } catch {
                 //エラー処理
             }
         }
-        
-        
-        
-        
-        
         
         let savePanel = NSSavePanel()
         savePanel.canCreateDirectories = true
