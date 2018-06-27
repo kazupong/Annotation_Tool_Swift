@@ -4,12 +4,15 @@
 
 ## Abstruct
 
-    Using Xcode with Swift4, this application enables users to annotate the coordinates of rectangular sections.
+    Using Xcode with Swift4, 
+    this application enables users to annotate the coordinates of rectangular sections.
     that users wish to label. 
 ----------
 
 ## Remarks
-    This app is currently under development by @kazupong. Because I, @kazupong am quite new to Swift development Any suggestion and feedback would be appreciated.
+    This app is currently under development by @kazupong. 
+    Because I, @kazupong am quite new to Swift development,
+    Any suggestion and feedback would be appreciated.
 
 ## what I need to work on more... 
 
@@ -24,8 +27,8 @@
 
 ## Environment
 
-> MacOS development target 10.13. 
-> Xcode Version 9.4.  
-> Swift version 4.1. 
+    * MacOS development target 10.13.   
+    * Xcode Version 9.4.  
+    * Swift version 4.1. 
 --------
  
