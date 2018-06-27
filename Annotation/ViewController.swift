@@ -11,22 +11,23 @@ import QuartzCore
 
 class ViewController: NSViewController,NSTableViewDataSource {
     
-    // 画像を表示させるimageView
+    /* 画像を表示させるimageView */
     @IBOutlet weak var imageView: NSImageView!
     @IBOutlet weak var customView: NSView!
     @IBOutlet weak var customView02: NSView!
     
-    // メンバ
+    /* メンバ */
     var text_write:String = "yeah"
     var filename:String   = ""
+    var demo_array = [[1,1,1,1],[2,2,2,2],[3,3,3,3]]
     
     //@IBOutlet var rectArray: NSArrayController!
     var rectArray: Array<NSRect> = Array()
     
-   
+    /* Application life circle */
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 破線の矩形をマウス操作で表示
+        /* 破線の矩形をマウス操作で表示 */
         let dr = DrawRectangle(frame: customView.frame)
         self.customView.addSubview(dr)
         
@@ -37,15 +38,44 @@ class ViewController: NSViewController,NSTableViewDataSource {
         // Update the view, if already loaded.
         }
     }
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return rectArray.count
+    
+    /* Nextボタンが押された時のアクション*/
+    @IBAction func NextButton(_ sender: Any) {
+        // Note: sandbox in entitlement file has changed to false, meaning that sandbox was disabled,
+        //       and this app wont be able to be distributed throuhgout itunes with this status
+        
+        // writeのPATH設定: Desktopにtxt fileを作成する as fileName below
+        let fileName = "annotation_txt_output"
+        let DocumentDirURL = try! FileManager.default.url(for: .desktopDirectory,in: .userDomainMask,
+                                                          appropriateFor: nil, create: true)
+        let fileURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension("txt")
+        print("file path \(fileURL.path)")
+        
+        // ここでdemo_arrayから座標値を取得しStringにpurseして、writeString変数に格納
+        var writeString = ""
+        while demo_array.isEmpty == false {
+            let temp = demo_array.popLast()
+            var num = 0
+            for ele in temp! {
+                writeString += String(ele)
+                num += 1
+                if temp?.count != num {
+                    writeString += ","
+                }
+            }
+            writeString += " "
+            num = 0
+        }
+        // desktopにある（もしくは、存在していなければ自動で新規に作成される）txt_output.txtに　writeStringの内容を書き込む
+        do {
+            try writeString.write(to: fileURL, atomically: true, encoding: String.Encoding.utf8)
+        } catch let error as NSError{
+            print(error)
+        }
+        writeString += "\n"
     }
     
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        return rectArray[row]
-    }
-    
-    // ファイルを一つづつ選択するボタン
+    /* 「　select fil 」 ボタンが押される際のアクション：画像ファイルをFinderからひとつ手動で選択し、表示させるボタン */
     @IBAction func selectFile(_ sender: Any) {
         
         let dialog = NSOpenPanel() //ファイルを開くダイアログ
@@ -65,7 +95,7 @@ class ViewController: NSViewController,NSTableViewDataSource {
             }
         }
     }
-    
+    /*Saveボタンが押された際のアクション */
     @IBAction func Save(_ sender: Any) {
         
         //desktopに書きだし
@@ -94,8 +124,5 @@ class ViewController: NSViewController,NSTableViewDataSource {
     
     }
     
-    
-    
-    
-    
 }
+
