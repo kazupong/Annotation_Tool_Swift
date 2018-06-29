@@ -12,11 +12,14 @@ import QuartzCore
 class ViewController: NSViewController,NSTableViewDataSource {
     
     /* 画像を表示させるimageView */
-    @IBOutlet weak var imageView: NSImageView!
+    @IBOutlet weak var imageView:  NSImageView!
     @IBOutlet weak var customView: NSView!
-    @IBOutlet weak var customView02: NSView!
+    @IBOutlet weak var sidemenuView: NSView!
+    @IBOutlet weak var CustomBoxRight: NSBox!
+    
     
     /* メンバ */
+    var image:NSImage?
     var text_write:String = "yeah"
     var filename:String   = ""
     var demo_array = [[1,1,1,1],[2,2,2,2],[3,3,3,3]]
@@ -26,17 +29,49 @@ class ViewController: NSViewController,NSTableViewDataSource {
     
     /* Application life circle */
     override func viewDidLoad() {
+    
         super.viewDidLoad()
-        /* 破線の矩形をマウス操作で表示 */
-        let dr = DrawRectangle(frame: customView.frame)
-        self.customView.addSubview(dr)
+        self.view.wantsLayer = true
+    }
+    
+    override func viewWillAppear() {
+        CustomBoxRight.layer?.backgroundColor = NSColor.lightGray.cgColor
+        sidemenuView.layer?.backgroundColor = NSColor.lightGray.cgColor
+        customView.layer?.backgroundColor = NSColor.lightGray.cgColor
         
+        CustomBoxRight.layer?.setNeedsDisplay()
+        sidemenuView.layer?.setNeedsDisplay()
+        customView.layer?.setNeedsDisplay()
     }
 
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
         }
+    }
+     /* 指定した矩形を全部消すボタンのアクション　*/
+    @IBAction func DeleteALL(_ sender: Any) {
+        
+        while (self.customView.layer?.sublayers?.capacity)! > 1 {
+            self.customView.layer?.sublayers?.popLast()
+        }
+        
+        // tableViewに表示した矩形の情報も削除する
+        // code here!
+        //
+        
+    }
+     /*直前に描写した矩形を消すボタンのアクション*/
+    @IBAction func DeletePrevious(_ sender: Any) {
+        
+        if (self.customView.layer?.sublayers?.capacity)! > 1 {
+            self.customView.layer?.sublayers?.popLast()
+        }
+        
+        // tableViewに表示した矩形の情報も削除する
+        // code here!
+        //
+        
     }
     
     /* Nextボタンが押された時のアクション*/
@@ -75,7 +110,7 @@ class ViewController: NSViewController,NSTableViewDataSource {
         writeString += "\n"
     }
     
-    /* 「　select fil 」 ボタンが押される際のアクション：画像ファイルをFinderからひとつ手動で選択し、表示させるボタン */
+    /* 「select file」 ボタンが押される際のアクション：画像ファイルをFinderからひとつ手動で選択し、表示させるボタン */
     @IBAction func selectFile(_ sender: Any) {
         
         let dialog = NSOpenPanel() //ファイルを開くダイアログ
@@ -92,9 +127,11 @@ class ViewController: NSViewController,NSTableViewDataSource {
                 self.filename = (dialog.url?.absoluteString)!
                 // ここでファイルを読み込む
                 self.imageView.image = NSImage(contentsOf: dialog.url!)
+                self.image = NSImage(contentsOf: dialog.url!)
             }
         }
     }
+    
     /*Saveボタンが押された際のアクション */
     @IBAction func Save(_ sender: Any) {
         
