@@ -11,17 +11,19 @@ import QuartzCore
 
 class ViewController: NSViewController,NSTableViewDataSource {
     
-    /* 画像を表示させるimageView */
+    /* Outlet */
+    @IBOutlet var mainView: NSView!
     @IBOutlet weak var imageView:  NSImageView!
     @IBOutlet weak var customView: NSView!
-    @IBOutlet weak var sidemenuView: NSView!
-    @IBOutlet weak var CustomBoxRight: NSBox!
-    
+    @IBOutlet weak var topCustomView: NSView!
+    @IBOutlet weak var displayTextView: NSTextField!
     
     /* メンバ */
     var image:NSImage?
-    var text_write:String = "yeah"
+    let windowTitle: String? = "Annotation Tool"
     var filename:String   = ""
+    var folderName:String = ""
+    
     var demo_array = [[1,1,1,1],[2,2,2,2],[3,3,3,3]]
     
     //@IBOutlet var rectArray: NSArrayController!
@@ -29,18 +31,31 @@ class ViewController: NSViewController,NSTableViewDataSource {
     
     /* Application life circle */
     override func viewDidLoad() {
-    
         super.viewDidLoad()
+        
+       // displayTextView.text = "file not selected"
+        
         self.view.wantsLayer = true
+       
     }
     
     override func viewWillAppear() {
-        CustomBoxRight.layer?.backgroundColor = NSColor.lightGray.cgColor
-        sidemenuView.layer?.backgroundColor = NSColor.lightGray.cgColor
-        customView.layer?.backgroundColor = NSColor.lightGray.cgColor
         
-        CustomBoxRight.layer?.setNeedsDisplay()
-        sidemenuView.layer?.setNeedsDisplay()
+        //mainView.window?.titleVisibility = .hidden
+        mainView.window?.appearance = NSAppearance(named: NSAppearance.Name.vibrantDark)
+        //mainView.window?.backgroundColor = NSColor.darkGray
+        mainView.window?.title = windowTitle!
+        
+        mainView.layer?.backgroundColor = NSColor.black.cgColor
+        mainView.layer?.setNeedsDisplay()
+        
+        topCustomView.layer?.backgroundColor = NSColor.gray.cgColor
+        topCustomView.layer?.setNeedsDisplay()
+        
+        
+        
+        
+        customView.layer?.backgroundColor = NSColor.lightGray.cgColor
         customView.layer?.setNeedsDisplay()
     }
 
@@ -49,21 +64,17 @@ class ViewController: NSViewController,NSTableViewDataSource {
         // Update the view, if already loaded.
         }
     }
-     /* 指定した矩形を全部消すボタンのアクション　*/
-    @IBAction func DeleteALL(_ sender: Any) {
-        
+    /* 描写した矩形を全て消すボタンのアクション */
+    @IBAction func deleteAllButton(_ sender: Any) {
         while (self.customView.layer?.sublayers?.capacity)! > 1 {
             self.customView.layer?.sublayers?.popLast()
         }
-        
         // tableViewに表示した矩形の情報も削除する
         // code here!
         //
-        
     }
-     /*直前に描写した矩形を消すボタンのアクション*/
-    @IBAction func DeletePrevious(_ sender: Any) {
-        
+    /*直前に描写した矩形を消すボタンのアクション*/
+    @IBAction func deleteButton(_ sender: Any) {
         if (self.customView.layer?.sublayers?.capacity)! > 1 {
             self.customView.layer?.sublayers?.popLast()
         }
@@ -71,7 +82,6 @@ class ViewController: NSViewController,NSTableViewDataSource {
         // tableViewに表示した矩形の情報も削除する
         // code here!
         //
-        
     }
     
     /* Nextボタンが押された時のアクション*/
@@ -110,8 +120,8 @@ class ViewController: NSViewController,NSTableViewDataSource {
         writeString += "\n"
     }
     
-    /* 「select file」 ボタンが押される際のアクション：画像ファイルをFinderからひとつ手動で選択し、表示させるボタン */
-    @IBAction func selectFile(_ sender: Any) {
+    /* select file ボタンが押される際のアクション：画像ファイルをFinderからひとつ手動で選択し、表示させるボタン */
+    @IBAction func selectFileButton(_ sender: Any) {
         
         let dialog = NSOpenPanel() //ファイルを開くダイアログ
         dialog.canChooseDirectories=false // ディレクトリを選択できるか
@@ -130,36 +140,36 @@ class ViewController: NSViewController,NSTableViewDataSource {
                 self.image = NSImage(contentsOf: dialog.url!)
             }
         }
-    }
+    } // ----------
     
-    /*Saveボタンが押された際のアクション */
-    @IBAction func Save(_ sender: Any) {
+    /* selectFolderボタンが押された際のアクション*/
+    @IBAction func selectFolderButton(_ sender: Any) {
         
-        //desktopに書きだし
-        if let dir = FileManager.default.urls( for: .desktopDirectory, in: .userDomainMask ).first {
-            
-            let path_file_name = dir.appendingPathComponent(filename)
-            
-            do {
-                try text_write.write( to: path_file_name, atomically: false, encoding: String.Encoding.utf8 )
-            } catch {
-                //エラー処理
-            }
-        }
-        
-        let savePanel = NSSavePanel()
-        savePanel.canCreateDirectories = true
-        savePanel.showsTagField = false
-        savePanel.nameFieldStringValue = "\(filename).jpeg"
-        savePanel.begin { (result) in
-            if result.rawValue == NSApplication.ModalResponse.OK.rawValue {
-                guard let URL = savePanel.url else { return }
-                //log.info(url.absoluteString)
+        let dialog = NSOpenPanel() //ファイルを開くダイアログ
+        dialog.canChooseDirectories = true // ディレクトリを選択できるか
+        dialog.canChooseFiles = false // ファイルを選択できるか
+        dialog.canCreateDirectories = false // ディレクトリを作成できるか
+        dialog.allowsMultipleSelection = false // 複数ファイルの選択を許すか
+        dialog.allowedFileTypes = NSImage.imageTypes // 選択できるファイル種別
+        dialog.begin { (result) -> Void in
+            if result.rawValue == NSApplication.ModalResponse.OK.rawValue {// ファイルを選択したか(OKを押したか)
+                guard dialog.url != nil else { return }
+                //urlのStringを保存
+                self.folderName = (dialog.url?.absoluteString)!
                 
+                // ここでfolderから画像ファイルを読み込みlistに保存
+                
+                
+                //self.imageView.image = NSImage(contentsOf: dialog.url!)
+                //self.image = NSImage(contentsOf: dialog.url!)
             }
         }
+        
+    } // -------------
     
-    }
     
-}
+    
+    
 
+}
+// ------------------  the end of ViewController.swift  -----------------

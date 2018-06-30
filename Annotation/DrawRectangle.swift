@@ -12,25 +12,33 @@ import QuartzCore
 
 class DrawRectangle: NSView {
     
+    // マウスをドラッグされた時の座標値を保存する変数
     var start_point: CGPoint?
     var end_point:   CGPoint?
+    // shapeLayerオブジェクトを宣言
     var shapeLayer : CAShapeLayer!
-    var count:Int = 0
+    // 矩形の色付けするためのクラス変数
+    var count4color:Int = 1
+    // 矩形の色付けする色の数
+    let numColor = 6
     // ViewController Class を呼び出す
     let VC = ViewController()
-
+    
+    
     override func draw(_ dirtyRect: NSRect) {
+        NSColor.darkGray.set()
         super.draw(dirtyRect)
     }
     
+    /*マウスのクリックがされた時のアクション*/
     override func mouseDown(with event: NSEvent) {
         
         self.start_point = self.convert(event.locationInWindow, from: nil)
         
         shapeLayer = CAShapeLayer()
-        shapeLayer.lineWidth = 1.0
+        shapeLayer.lineWidth = 1.5
         shapeLayer.fillColor = NSColor.clear.cgColor
-        shapeLayer.strokeColor = NSColor.black.cgColor
+        shapeLayer.strokeColor = NSColor.purple.cgColor
         shapeLayer.lineDashPattern = [10,5]
         self.layer?.addSublayer(shapeLayer)
         
@@ -42,7 +50,7 @@ class DrawRectangle: NSView {
         dashAnimation.repeatCount = .infinity
         shapeLayer.add(dashAnimation, forKey: "linePhase")
     }
-    
+    /* マウスのドラッグされた時のアクション*/
     override func mouseDragged(with event: NSEvent) {
         
         let point : NSPoint = self.convert(event.locationInWindow, from: nil)
@@ -53,18 +61,21 @@ class DrawRectangle: NSView {
         path.addLine(to: NSPoint(x:point.x,y:(self.start_point?.y)!))
         path.closeSubpath()
         self.shapeLayer.path = path
-        
     }
-    
+    /* マウスのクリックがあがった時のアクション */
     override func mouseUp(with event: NSEvent){
-        
+        //座標の取得
         end_point = event.locationInWindow
         
-        // layerから消す
+        // 破線をアニメーションをlayerから消す
         self.shapeLayer.removeFromSuperlayer()
         self.shapeLayer = nil
+        //ここで破線の矩形の座標を参考に、新しく矩形を作る
         drawRect()
         
+        // 矩形の座標値を渡す
+        // debug here!! 
+        //
         let temp:NSRect = NSRect(x:   (start_point?.x)!,
                                  y:   (start_point?.y)!,
                                  width:   ((end_point?.x)! - (start_point?.x)!),
@@ -72,8 +83,8 @@ class DrawRectangle: NSView {
         
         VC.rectArray.append(temp)
         print(VC.rectArray)
-        
     }
+    
     // 新しく矩形を作り、色分けしたものを表示
     func drawRect() -> Void {
         
@@ -82,7 +93,7 @@ class DrawRectangle: NSView {
         shapeLayer.fillColor = NSColor.clear.cgColor
         shapeLayer.strokeColor = {()-> CGColor in
             
-            let colorVal = count % 5
+            let colorVal = count4color % numColor
             var returnVal:CGColor?
             
             switch colorVal{
@@ -95,12 +106,14 @@ class DrawRectangle: NSView {
                 case 3:
                     returnVal = NSColor.yellow.cgColor
                 case 4:
-                    returnVal = NSColor.purple.cgColor
+                    returnVal = NSColor.brown.cgColor
+                case 5:
+                    returnVal = NSColor.orange.cgColor
                 default:
                     print("error in drawRect() from DrawRectangle.swift class")
             }
-            print(count)
-            self.count = count + 1
+           
+            self.count4color += 1
             
             return returnVal!
         }()
@@ -135,7 +148,7 @@ class DrawRectangle: NSView {
             default:
                 print("error in drawRect() from DrawRectangle.swift class")
             }
-            self.count += 1
+            self.count4color += 1
             return returnVal!
         }
         print("error in drawRect() from DrawRectangle.swift class")

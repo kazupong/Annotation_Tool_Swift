@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
-        <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,107 +31,130 @@
             <objects>
                 <viewController id="OpK-GS-L56" customClass="ViewController" customModule="Annotation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="cvS-EZ-SfK">
-                        <rect key="frame" x="0.0" y="0.0" width="939" height="804"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1135" height="804"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <customView wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D7j-zO-x9Z" customClass="DrawRectangle" customModule="Annotation" customModuleProvider="target">
-                                <rect key="frame" x="144" y="55" width="607" height="694"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <rect key="frame" x="210" y="8" width="723" height="724"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UCu-Pq-GNq">
-                                        <rect key="frame" x="0.0" y="0.0" width="607" height="694"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Image" id="TzF-4M-0cx"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="723" height="724"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="image_top" id="TzF-4M-0cx"/>
                                     </imageView>
                                 </subviews>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </customView>
-                            <customView wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oWC-23-s2W">
-                                <rect key="frame" x="11" y="55" width="119" height="694"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <customView wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7bA-7d-nVh">
+                                <rect key="frame" x="0.0" y="740" width="1135" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s9V-mO-nar">
-                                        <rect key="frame" x="14" y="646" width="91" height="32"/>
+                                    <progressIndicator wantsLayer="YES" fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="WXc-el-jcB">
+                                        <rect key="frame" x="214" y="12" width="714" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="Select File" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6bE-Uc-hy5">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="selectFile:" target="OpK-GS-L56" id="jRX-lJ-ePL"/>
-                                        </connections>
-                                    </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UZo-8E-itK">
-                                        <rect key="frame" x="14" y="13" width="91" height="32"/>
+                                    </progressIndicator>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xqT-Mh-eXA">
+                                        <rect key="frame" x="393" y="33" width="349" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BU0-V9-tel">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="fileName" id="tvu-gk-auR">
                                             <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="Save:" target="OpK-GS-L56" id="ri0-T4-JEl"/>
-                                        </connections>
-                                    </button>
+                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                             </customView>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5rk-lT-6ph">
-                                <rect key="frame" x="770" y="48" width="155" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <buttonCell key="cell" type="push" title="Next" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QYK-ht-EyQ">
+                            <button wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gx3-GL-FoD">
+                                <rect key="frame" x="44" y="483" width="120" height="115"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="folder" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="e6u-3I-QIZ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="NextButton:" target="OpK-GS-L56" id="eQG-1w-LGm"/>
+                                    <action selector="selectFolderButton:" target="OpK-GS-L56" id="f1d-C5-9hN"/>
                                 </connections>
                             </button>
-                            <box wantsLayer="YES" fixedFrame="YES" boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="07J-KM-Gqs">
-                                <rect key="frame" x="769" y="619" width="157" height="130"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" wantsLayer="YES" ambiguous="YES" id="PKg-xI-UQV">
-                                    <rect key="frame" x="1" y="1" width="155" height="128"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cbX-1b-7C5">
-                                            <rect key="frame" x="10" y="71" width="135" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                            <buttonCell key="cell" type="push" title="Delete All " bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tOC-jJ-Lvb">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="DeleteALL:" target="OpK-GS-L56" id="JV6-n3-ftQ"/>
-                                            </connections>
-                                        </button>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CvL-j8-igy">
-                                            <rect key="frame" x="10" y="19" width="135" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                            <buttonCell key="cell" type="push" title="Delete Previous" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="W5r-ya-h7M">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="DeletePrevious:" target="OpK-GS-L56" id="fLV-O2-LaR"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                </view>
-                            </box>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eN5-C9-Bx3">
+                                <rect key="frame" x="44" y="624" width="120" height="108"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="file" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="vNc-JX-chf">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="selectFileButton:" target="OpK-GS-L56" id="ub9-g8-cUN"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gpJ-Bt-eyf">
+                                <rect key="frame" x="50" y="2" width="120" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="setting" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="ebv-VY-xzs">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="btW-EI-fvj">
+                                <rect key="frame" x="983" y="624" width="120" height="108"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="delete_All" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="DYY-3q-BPm">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="deleteAllButton:" target="OpK-GS-L56" id="Roq-UK-xAU"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nqT-5R-0c7">
+                                <rect key="frame" x="989" y="483" width="108" height="117"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="delete" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="OQi-kZ-p8g">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="deleteButton:" target="OpK-GS-L56" id="g5D-FR-WmB"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rGd-iE-Vb6">
+                                <rect key="frame" x="989" y="13" width="108" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="next" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="0ET-hb-Iur">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="NextButton:" target="OpK-GS-L56" id="Du4-jJ-aB5"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="CustomBoxRight" destination="07J-KM-Gqs" id="1va-DP-6b2"/>
                         <outlet property="CustomView" destination="D7j-zO-x9Z" id="K5M-Ye-hLX"/>
                         <outlet property="customView" destination="D7j-zO-x9Z" id="qq4-ka-eG2"/>
+                        <outlet property="displayTextView" destination="xqT-Mh-eXA" id="lp4-tO-GSL"/>
                         <outlet property="imageView" destination="UCu-Pq-GNq" id="6WU-le-FcR"/>
-                        <outlet property="sidemenuView" destination="oWC-23-s2W" id="5TI-t7-LCl"/>
+                        <outlet property="mainView" destination="cvS-EZ-SfK" id="lSX-4F-QCZ"/>
+                        <outlet property="topCustomView" destination="7bA-7d-nVh" id="0Ig-9W-tLp"/>
                     </connections>
                 </viewController>
                 <customObject id="4wS-D4-2IQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="414.5" y="41"/>
+            <point key="canvasLocation" x="616.5" y="12"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Image" width="600" height="600"/>
+        <image name="delete" width="400" height="400"/>
+        <image name="delete_All" width="400" height="400"/>
+        <image name="file" width="400" height="400"/>
+        <image name="folder" width="400" height="400"/>
+        <image name="image_top" width="612" height="792"/>
+        <image name="next" width="400" height="400"/>
+        <image name="setting" width="400" height="400"/>
     </resources>
 </document>
