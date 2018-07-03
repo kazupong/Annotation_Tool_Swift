@@ -42,7 +42,7 @@
                                     <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UCu-Pq-GNq">
                                         <rect key="frame" x="0.0" y="0.0" width="723" height="724"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="top_image-1" id="TzF-4M-0cx"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="top_image" id="TzF-4M-0cx"/>
                                     </imageView>
                                 </subviews>
                                 <userDefinedRuntimeAttributes>
@@ -156,6 +156,6 @@
         <image name="folder" width="400" height="400"/>
         <image name="next" width="400" height="400"/>
         <image name="setting" width="400" height="400"/>
-        <image name="top_image-1" width="612" height="792"/>
+        <image name="top_image" width="612" height="792"/>
     </resources>
 </document>
