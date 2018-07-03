@@ -12,6 +12,7 @@ import QuartzCore
 
 class DrawRectangle: NSView {
     
+    /* メンバ　*/
     // マウスをドラッグされた時の座標値を保存する変数
     var start_point: CGPoint?
     var end_point:   CGPoint?
@@ -21,6 +22,10 @@ class DrawRectangle: NSView {
     var count4color:Int = 1
     // 矩形の色付けする色の数
     let numColor = 6
+    // 矩形情報を保存する
+    var rectInfo:[NSRect] = []
+    
+    
     // ViewController Class を呼び出す
     let VC = ViewController()
     
@@ -81,8 +86,11 @@ class DrawRectangle: NSView {
                                  width:   ((end_point?.x)! - (start_point?.x)!),
                                  height:   ((end_point?.y)! - (start_point?.y)!))
         
-        VC.rectArray.append(temp)
-        print(VC.rectArray)
+        self.rectInfo.append(temp)
+        print(rectInfo)
+       // VC.rectArray.append(temp)
+       // print(VC.rectArray)
+       
     }
     
     // 新しく矩形を作り、色分けしたものを表示
