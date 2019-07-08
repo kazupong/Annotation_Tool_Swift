@@ -1,6 +1,6 @@
 #                          EZ-Labeler
 
-![](readme_images/logo.png =1000x1000)
+<img src="https://github.com/kazupong/ez-labeler/blob/master/readme_images/logo.png" width="500">
 
  a MacOS desktop app that annotates rectabgle regions where you click-and-drag-ed and writes the coordinates into a text file per row. This is a demo annotation tool application I used to create a trainning data set for some supervised learning project I have worked for. 
 
