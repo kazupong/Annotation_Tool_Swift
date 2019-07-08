@@ -1,12 +1,10 @@
 #                          EZ-Labeler
 
-![](readme_images/logo.png)
+![](readme_images/logo.png =1000x1000)
 
-    a MacOS desktop annotation (Labeling) tool application with Swift4 and Xcode for supervised learning 
+ a MacOS desktop app that annotates rectabgle regions where you click-and-drag-ed and writes the coordinates into a text file per row. This is a demo annotation tool application I used to create a trainning data set for some supervised learning project I have worked for. 
 
 ----------
-
-![](readme_images/workflow.png)
 
 ![](readme_images/top_image.png)
 
@@ -17,11 +15,7 @@
     that users wish to label. 
 ----------
 
-## Remarks
-    This app is currently under development by @kazupong. 
-    Because I, @kazupong am quite new to Swift development,
-    Any suggestion and feedback would be appreciated.
-
+    
 ## what I need to work on more... 
 
 - [ ]   Application delegate to pass data one to another
