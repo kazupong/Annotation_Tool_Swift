@@ -1,4 +1,4 @@
-#                          Annotation_Tool_Swift
+#                          EZ-Labeler
 
 ![](readme_images/logo.png)
 
